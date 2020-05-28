@@ -14,7 +14,7 @@ class Anuncio{
 
     public function __construct(){
         try{
-            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "jackvini2", "Sacramento1@");
+            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "root", "");
         }catch(PDOException $e){
             echo "Error: ".$e->getMessage();
         }

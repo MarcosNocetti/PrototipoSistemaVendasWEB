@@ -1,5 +1,5 @@
 <?php
-require "../../assets/classes/User.class.php";
+require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 session_start();
 
 $email = $_POST['email'];

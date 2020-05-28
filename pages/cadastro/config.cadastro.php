@@ -1,9 +1,9 @@
 <?php
-require "../../assets/classes/User.class.php";
+require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$nome = $_POST['userName'];
+$email = $_POST['userEmail'];
+$senha = $_POST['userPass'];
 $usuario = new User;
 
 $statusRequest['status'] = "none";

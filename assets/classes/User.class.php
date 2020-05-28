@@ -7,7 +7,7 @@ class User{
     private $nome;
     private $email;
     private $telefone;
-    private $senha;
+    private $pass;
     private $avatar;
     private $estado;
     private $cidade;
@@ -15,13 +15,13 @@ class User{
 
     public function __construct($id = NULL){
         try {
-            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "jackvini2", "Sacramento1@");
+            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "root", "");
         } catch (PDOException $e) {
             echo "Error: ".$e->getMessage();
         }
 
         if(!empty($id)){
-            $sql = "SELECT * FROM users WHERE id = :id";
+            $sql = "SELECT * FROM tb_admin.usuarios WHERE id = :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":id", $id);
             $sql->execute();
@@ -30,11 +30,11 @@ class User{
                 $data = $sql->fetch();
                 
                 $this->id = $data['id'];
-                $this->fbId = $data['fb_id'];
+                $this->fbId = $data['fbid'];
                 $this->nome = $data['nome'];
                 $this->email = $data['email'];
                 $this->telefone = $data['telefone'];
-                $this->senha = $data['senha'];
+                $this->pass = $data['pass'];
                 $this->avatar = $data['avatar'];
                 $this->estado = $data['estado'];
                 $this->cidade = $data['cidade'];
@@ -66,7 +66,7 @@ class User{
 
     public function mudaEmail($e){
         if($this->verificaEmail($e) == false){
-            $sql = "UPDATE users SET email = :email WHERE id = :id";
+            $sql = "UPDATE tb_admin.usuarios SET email = :email WHERE id = :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":email", $e);
             $sql->bindValue(":id", $this->id);
@@ -87,8 +87,8 @@ class User{
     }
     
 
-    public function setSenha($s){
-        $this->senha = $s;
+    public function setpass($s){
+        $this->pass = $s;
     }
 
 
@@ -129,11 +129,11 @@ class User{
 
     public function SaveOrCreateUser(){
         if(!empty($this->id)){
-            $sql = "UPDATE users 
+            $sql = "UPDATE tb_admin.usuarios 
                     SET
                         nome = :nome,
                         email = :email,
-                        senha = :senha,
+                        pass = :pass,
                         telefone = :telefone,
                         avatar = :avatar,
                         estado = :estado,
@@ -144,7 +144,7 @@ class User{
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":nome",$this->nome);
             $sql->bindValue(":email",$this->email);
-            $sql->bindValue(":senha",$this->senha);
+            $sql->bindValue(":pass",$this->pass);
             $sql->bindValue(":telefone",$this->telefone);
             $sql->bindValue(":avatar",$this->avatar);
             $sql->bindValue(":estado", $this->estado);
@@ -156,15 +156,15 @@ class User{
 
         }else{
             if($this->verificaEmail($this->email) == false){
-                $sql = "INSERT INTO users(id, fb_id, nome, email, avatar, senha, telefone, estado, cidade, bairro) 
-                    VALUES (NULL,:fb_id,:nome,:email, :avatar,:senha, :estado, :cidade, :bairro)";
+                $sql = "INSERT INTO tb_admin.usuarios(id, fbid, nome, email, avatar, pass, telefone, estado, cidade, bairro) 
+                    VALUES (NULL,:fbid,:nome,:email, :avatar,:pass, :estado, :cidade, :bairro)";
                 
                 $sql = $this->pdo->prepare($sql);
-                $sql->bindValue(":fb_id",$this->fbId);
+                $sql->bindValue(":fbid",$this->fbId);
                 $sql->bindValue(":nome",$this->nome);
                 $sql->bindValue(":email",$this->email);
                 $sql->bindValue(":avatar",$this->avatar);
-                $sql->bindValue(":senha",$this->senha);
+                $sql->bindValue(":pass",$this->pass);
                 $sql->bindValue(":telefone",$this->telefone);
                 $sql->bindValue(":estado", $this->estado);
                 $sql->bindValue(":cidade", $this->cidade);
@@ -181,7 +181,7 @@ class User{
     }
 
     private function verificaEmail($e){
-        $sql = "SELECT * FROM users WHERE email = :email";
+        $sql = "SELECT * FROM tb_admin.usuarios WHERE email = :email";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(":email", $e);
         $sql->execute();
@@ -193,10 +193,10 @@ class User{
         }
     }
 
-    public function verificaSenha($senha, $id){
-        $sql = 'SELECT * FROM users WHERE senha = :senha AND id = :id';
+    public function verificapass($pass, $id){
+        $sql = 'SELECT * FROM tb_admin.usuarios WHERE pass = :pass AND id = :id';
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':senha', $senha);
+        $sql->bindValue(':pass', $pass);
         $sql->bindValue(':id', $id);
         $sql->execute();
 
@@ -208,42 +208,42 @@ class User{
     }
 
     public function salvarLogarFB(){
-        $sql = 'SELECT * FROM users WHERE fb_id = :fb_id';
+        $sql = 'SELECT * FROM tb_admin.usuarios WHERE fbid = :fbid';
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":fb_id", $this->fbId);
+        $sql->bindValue(":fbid", $this->fbId);
         $sql->execute();
 
         if($sql->rowCount() > 0){
             foreach($sql as $dados){
                 $_SESSION['id'] = $dados['id'];
-                $_SESSION['fb_id'] = $dados['fb_id'];
+                $_SESSION['fbid'] = $dados['fbid'];
             }
             
             header("Location: ../../index.php");
         }else{
-            $sql = "INSERT INTO users(id, fb_id, nome, email, avatar, senha, telefone, estado, cidade, bairro) 
-                    VALUES (NULL,:fb_id,:nome,:email, :avatar,:senha,:telefone,:estado,:cidade,:bairro)";
+            $sql = "INSERT INTO tb_admin.usuarios(id, fbid, nome, email, avatar, pass, telefone, estado, cidade, bairro) 
+                    VALUES (NULL,:fbid,:nome,:email, :avatar,:pass,:telefone,:estado,:cidade,:bairro)";
                 
             $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":fb_id",$this->fbId);
+            $sql->bindValue(":fbid",$this->fbId);
             $sql->bindValue(":nome",$this->nome);
             $sql->bindValue(":email",$this->email);
             $sql->bindValue(":avatar",$this->avatar);
-            $sql->bindValue(":senha",$this->senha);
+            $sql->bindValue(":pass",$this->pass);
             $sql->bindValue(":telefone",$this->telefone);
             $sql->bindValue(":estado", $this->estado);
             $sql->bindValue(":cidade", $this->cidade);
             $sql->bindValue(":bairro", $this->bairro);
             $sql->execute();
 
-            $sql2 = 'SELECT * FROM users WHERE fb_id = :fb_id';
+            $sql2 = 'SELECT * FROM tb_admin.usuarios WHERE fbid = :fbid';
             $sql2 = $this->pdo->prepare($sql2);
-            $sql2->bindValue(":fb_id", $this->fbId);
+            $sql2->bindValue(":fbid", $this->fbId);
             $sql2->execute();
 
             foreach($sql2 as $dados){
                 $_SESSION['id'] = $dados['id'];
-                $_SESSION['fb_id'] = $dados['fb_id'];
+                $_SESSION['fbid'] = $dados['fbid'];
             }
             
             header("Location: ../../index.php");
@@ -252,25 +252,25 @@ class User{
     }
 
     public function defaultLogin($e, $s){
-        $sql = 'SELECT * FROM users WHERE email = :email AND senha = :senha';
+        $sql = 'SELECT * FROM tb_admin.usuarios WHERE email = :email AND pass = :pass';
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(":email", $e);
-        $sql->bindValue(":senha", $s);
+        $sql->bindValue(":pass", $s);
         $sql->execute();
 
         if($sql->rowCount() == 1){
             $dados = $sql->fetch();
             $_SESSION['id'] = $dados['id'];
-            $_SESSION['fb_id'] = $dados['id'];
+            $_SESSION['fbid'] = $dados['id'];
             return true;
         }else{
             return false;
         }
     }
 
-    public function senhaEmpty($id){
+    public function passEmpty($id){
         $user_id = $id;
-        $sql = 'SELECT * FROM users WHERE id = :id';
+        $sql = 'SELECT * FROM tb_admin.usuarios WHERE id = :id';
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':id', $user_id);
         $sql->execute();
@@ -279,7 +279,7 @@ class User{
             foreach($sql as $dados);
         }
 
-        if($dados['senha'] == null){
+        if($dados['pass'] == null){
             return true;
         }else{
             return false;

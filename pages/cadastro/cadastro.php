@@ -48,7 +48,7 @@
                 <div class="inputTitle">Senha</div>
                 <div class="inputSubTitle">Use letra, números e caracteres especiais</div> 
             </div>
-            <input type="password" name="email" class="input" id="userPass">
+            <input type="password" name="senha" class="input" id="userPass">
             <div class="status senha"></div>
 
             <button type="submit" id="btnSubmit">Cadastre-se</button>

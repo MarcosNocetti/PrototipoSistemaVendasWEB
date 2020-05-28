@@ -1,5 +1,5 @@
 <?php
-require "../../assets/classes/User.class.php";
+require "xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 
 
 if(isset($_SESSION['id']) && !empty($_SESSION['id']) || isset($_SESSION['fb_id']) && !empty($_SESSION['fb_id'])){

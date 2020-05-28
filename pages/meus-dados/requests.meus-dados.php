@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../../assets/classes/User.class.php";
+require "xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 
 $user_sts = new User($_SESSION['id']);
 
