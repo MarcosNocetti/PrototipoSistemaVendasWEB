@@ -194,11 +194,9 @@ class User{
     }
 
     public function verificapass($pass, $id){
-        $sql = 'SELECT * FROM tb_admin.usuarios WHERE pass = :pass AND id = :id';
+        $sql = 'SELECT * FROM tb_admin.usuarios WHERE email = ? AND pass = ?';
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':pass', $pass);
-        $sql->bindValue(':id', $id);
-        $sql->execute();
+        $sql->execute(array($e, $s));
 
         if($sql->rowCount() > 0){
             return true;
