@@ -81,7 +81,7 @@ class Anuncio{
     public function Save_anuncio(){
            
 
-        $sql = "INSERT INTO Prototipomais.anuncios(id, userid, categoria_id, titulo, descricao, valor, cidade, estado, bairro) 
+        $sql = "INSERT INTO tb_site.anuncios(id, userid, categoria_id, titulo, descricao, valor, cidade, estado, bairro) 
                 VALUES (NULL,:userid,:categoria_id,:titulo,:descricao,:valor,:cidade,:estado,:bairro)";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(":userid", $this->userid);
@@ -95,7 +95,7 @@ class Anuncio{
 
         $sql->execute();
 
-        $sql2 = "SELECT id FROM anuncios WHERE userid = :userid AND titulo = :titulo AND valor = :valor AND descricao = :descricao";
+        $sql2 = "SELECT id FROM tb_site.anuncios WHERE userid = :userid AND titulo = :titulo AND valor = :valor AND descricao = :descricao";
         $sql2 = $this->pdo->prepare($sql2);
         $sql2->bindValue(":userid", $this->userid);
         $sql2->bindValue(":titulo", $this->titulo);

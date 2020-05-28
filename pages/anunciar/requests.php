@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../../assets/classes/Anuncios.class.php";
+require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/Anuncios.class.php";
 $anuncio = new Anuncio();
     if(!empty($_POST['titulo'])){   //FAZER AMANHA: Proibir mais de 6 imagens
         if(count($_FILES['fotos']['tmp_name']) < 7 && !empty($_FILES['fotos']['tmp_name']['0'])){
