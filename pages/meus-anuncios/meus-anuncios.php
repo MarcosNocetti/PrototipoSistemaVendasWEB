@@ -8,7 +8,7 @@ require "header/header.config.php";
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Prototipo+ - O melhor site de compras e vendas do Brasil</title>
+    <title>Pizzaria - O melhor site de compras e vendas do Brasil</title>
     <link rel="stylesheet" href="meus-anuncios.css">
     <link rel="stylesheet" href="header.css">
     <link rel="shortcut icon" href="../../assets/imgs/logoAPP.jpg" type="image/jpg" />
@@ -23,7 +23,7 @@ require "header/header.config.php";
 
 <div id="headerBackground">
     <div id="headerInv">
-        <div id="headerLogo">Prototipo+</div>
+        <div id="headerLogo">Pizzaria</div>
         <div id="headerMenuArea">
 
         <?php if(isset($_SESSION['id']) && !empty($_SESSION['id']) || isset($_SESSION['fb_id']) && !empty($_SESSION['fb_id'])){?>
@@ -33,7 +33,7 @@ require "header/header.config.php";
                 <li id="userArea"><div id="userName"><?php echo $header_nome; ?><span id="seta"><img src="../../assets/imgs/arrow.png" alt=""></span></div>
 
                     <ul id="userOpts">
-                        <li id="menu-anuncios">Meus anúncios</li>
+                        <li id="menu-anuncios">Meus pedidos</li>
                         <li class="endC" id="plano-pro">Plano PREMIUM</li>
                         <li class="endC" id="menu-cad">Meus dados</li>
                         <li id="menu-sair">Sair</li>
@@ -56,7 +56,7 @@ require "header/header.config.php";
 </div>
 
 <div id="bodyArea">
-    <div id="body1-title">Meus Anúncios</div>
+    <div id="body1-title">Meus pedidos</div>
     <table id="tabela-anuncios">
         <tr id="title-table">
             <th class="th-table left">Foto</th>
@@ -83,7 +83,7 @@ require "header/header.config.php";
                 <tr>
                     <td><a href="" class="footer-item-options">Ajuda e <br>contato</a></td>
                     <td><a href="" class="footer-item-options">Dicas de <br>segurança</a></td>
-                    <td><a href="" class="footer-item-options">Vender no <br>Prototipo+</a></td>
+                    <td><a href="" class="footer-item-options">Vender no <br>Pizzaria</a></td>
                     <td><a href="" class="footer-item-options">Plano profissional</a></td>
                 </tr>
             </table>

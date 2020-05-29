@@ -18,14 +18,14 @@ require "config.meus-dados.php";
     <link rel="stylesheet" href="meus-dados.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../footer/footer.css">
-    <title>Meus dados | Prototipo+</title>
+    <title>Meus dados | Pizzaria</title>
 </head>
 
 <body>
 <header>
     <div id="header">
         <div id="headerInv">
-            <div id="headLogo"><p> Prototipo+ </p></div>
+            <div id="headLogo"><p> Pizzaria </p></div>
             <a href="../home/logout.php" id="userStatusArea">
                 <div id="sairbtn">
                     Olá, <?php echo $nome;?> <span>&times;</span>

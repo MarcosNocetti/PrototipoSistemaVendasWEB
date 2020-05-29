@@ -3,7 +3,7 @@
             <div id="col1Footer">
                 <a href="">Ajuda e <br> contato</a>
                 <a href="">Dicas de<br> segurança</a>
-                <a href="">Vender no<br> Prototipo+</a>
+                <a href="">Vender no<br> Pizzaria</a>
                 <a href="">Plano<br> Profissional</a>
             </div>
 

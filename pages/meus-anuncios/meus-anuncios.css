@@ -21,7 +21,7 @@ body{
 #headerBackground{
   background-color: white;
   width: 100%;
-  border-bottom: 2px solid #2bb836;
+  border-bottom: 2px solid #c8102e;
 }
 
 #headerInv{
@@ -35,7 +35,7 @@ body{
   margin-left: 25px;
   font-family: 'Raleway', sans-serif;
   font-weight: 800;
-  color: #318a38;
+  color: #c8102e;
   cursor: pointer;
   align-self: center;
 }
@@ -53,7 +53,7 @@ body{
 
 #anunciarBtn{
   display: flex;
-  background-color: #318a38;
+  background-color: #c8102e;
   padding: 10px;
   color: white;
   font-family: 'Nunito Sans', sans-serif;
@@ -67,7 +67,7 @@ body{
 }
 
 #anunciarBtn:hover{
-  background-color: #2bb836;
+  background-color: #c8102e;
 }
 
 #userStatus{
@@ -133,7 +133,7 @@ body{
 }
 
 #meusAnunciosText:hover{
-  color: #318a38;
+  color: #c8102e;
 }
 
 #userOpts{
@@ -177,7 +177,7 @@ body{
 }
 
 #userOpts li a:hover{
-  color: #318a38 !important;
+  color: #c8102e !important;
 }
 
 .endC{
@@ -190,7 +190,7 @@ body{
 /* AREA DE PESQUISA */
 #seachBackground{
   width: 100%;
-  background-color: #318a38;
+  background-color: #c8102e;
 }
 
 
@@ -318,7 +318,7 @@ body{
 }
 
 #title-table{
-  background-color: #318a38;
+  background-color: #c8102e;
 }
 
 .td-table{

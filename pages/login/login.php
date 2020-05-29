@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 
-    <title>Login | Prototipo+</title>
+    <title>Login | Pizzaria</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
         <div class="loader"></div>
     </div>
     <div id="loginAreaBox">
-        <div id="LAtitle">Prototipo+</div>
+        <div id="LAtitle">Pizzaria</div>
         <div id="LAsubTitle">Acesse a sua conta</div>
 
         <a href="<?php echo htmlspecialchars(urldecode($loginUrl));?>" id="linkFBBTN">
@@ -58,8 +58,8 @@
 
     <div id="TermsAndUses">
         Ao continuar, você concorda com os <a href="#">Termos de 
-        Uso</a> e a <a href="#">Política de Privacidade</a> do Prototipo+,<br> e também,
-        em receber comunicações via e-mail e push do Prototipo+
+        Uso</a> e a <a href="#">Política de Privacidade</a> do Pizzaria,<br> e também,
+        em receber comunicações via e-mail e push do Pizzaria
         e seus parceiros.
     </div>
 

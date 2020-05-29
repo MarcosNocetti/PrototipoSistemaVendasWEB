@@ -44,7 +44,7 @@ a:hover {
     text-align: center;
     font-family: 'Raleway', sans-serif;
     font-weight: 800;
-    color: #318a38;
+    color: #c8102e;
     cursor: pointer;
 }
 
@@ -112,7 +112,7 @@ a:hover {
     font-size: 18px;
     font-family: "Nunito Sans";
     font-weight: bold;
-    background-color: #4BB543;
+    background-color: #c8102e;
     color: white;
     border: none;
     cursor: pointer;
@@ -134,7 +134,7 @@ a:hover {
     font-family: "Nunito Sans" !important;
     font-size: 16px;
     font-weight: bold;
-    color: #4BB543 !important;
+    color: #c8102e !important;
     text-decoration: none !important;
 }
 
@@ -147,7 +147,7 @@ a:hover {
 }
 
 #TermsAndUses a {
-    color: #318a38;
+    color: #c8102e;
     text-decoration: none;
 }
 
@@ -201,7 +201,7 @@ a:hover {
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid #318a38;
+    border-top: 16px solid #c8102e;
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */

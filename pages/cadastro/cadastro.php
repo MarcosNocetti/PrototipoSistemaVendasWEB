@@ -9,11 +9,11 @@
     <link rel="shortcut icon" href="../../assets/imgs/logoAPP.jpg" type="image/jpg" />
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <title>Minha conta | Prototipo+</title>
+    <title>Minha conta | Pizzaria</title>
 </head>
 <body>
     <div id="cadastroAreaBox">
-        <div id="CAtitle">Prototipo+</div>
+        <div id="CAtitle">Pizzaria</div>
         <div id="CAsubTitle">Crie a sua conta. É grátis</div>
 
         <a href="<?php echo htmlspecialchars(urldecode($loginUrl));?>" id="linkFBBTN">
@@ -59,8 +59,8 @@
 
     <div id="TermsAndUses">
         Ao continuar, você concorda com os <a href="#">Termos de 
-        Uso</a> e a <a href="#">Política de Privacidade</a> do Prototipo+,<br> e também,
-        em receber comunicações via e-mail e push do Prototipo+
+        Uso</a> e a <a href="#">Política de Privacidade</a> do Pizzaria,<br> e também,
+        em receber comunicações via e-mail e push do Pizzaria
         e seus parceiros.
     </div>
 

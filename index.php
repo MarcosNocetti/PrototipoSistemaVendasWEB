@@ -23,14 +23,14 @@ include "config.index.php";
 
     <div id="headerBackground">
         <div id="headerInv">
-            <div id="headerLogo">Prototipo+</div>
+            <div id="headerLogo">Pizzaria</div>
             <div id="headerMenuArea">
 
             <?php if(isset($_SESSION['id']) && !empty($_SESSION['id']) || isset($_SESSION['fb_id']) && !empty($_SESSION['fb_id'])){?>
                 
                 <div id="meusAnunciosArea">
                     <img src="assets/imgs/megaphone-grey.png" class="imgsMenu" id="megaphone">
-                    <div id="meusAnunciosText">Meus anúncios</div>
+                    <div id="meusAnunciosText">Meus pedidos</div>
                 </div>
                 <div id="userStatus">
                     <img src="assets/imgs/user_pics/user_avatar/<?php echo $avatar; ?>" class="imgsMenu" id="userAvatar">
@@ -38,7 +38,7 @@ include "config.index.php";
                     <li id="userArea"><div id="userName"><?php echo $nome; ?><span id="seta"><img src="assets/imgs/arrow.png" alt=""></span></div>
 
                         <ul id="userOpts">
-                            <li id="menu-anuncios">Meus anúncios</li>
+                            <li id="menu-anuncios">Meus pedidos</li>
                             <li class="endC" id="plano-pro">Plano PREMIUM</li>
                             <li class="endC" id="menu-cad">Meus dados</li>
                             <li id="menu-sair">Sair</li>
@@ -54,7 +54,7 @@ include "config.index.php";
 
                 <div id="meusAnunciosArea">
                     <img src="assets/imgs/megaphone-grey.png" class="imgsMenu">
-                    <div id="meusAnunciosText">Meus anúncios</div>
+                    <div id="meusAnunciosText">Meus pedidos</div>
                 </div>
 
                 <div id="areaLogin">
@@ -62,7 +62,9 @@ include "config.index.php";
                     <div id="userName">Entrar</div>
                 </div>
 
-                <div id="anunciarBtn"><p>Anunciar</p></div>
+                <div id="anunciarBtn">
+					<img src="assets/imgs/cart.ico">
+				</div>
 
             <?php } ?>
 
@@ -82,40 +84,22 @@ include "config.index.php";
         <div id="seuEstadoArea">
             <div id="estadoTitleArea">
                 <div id="estadoImgDiv"><img id="estadoIcon" src="assets/imgs/pin.png" alt=""></div>
-                <div class="globalTitle Estado">Escolha o seu estado:</div><br>
+                <div class="globalTitle Estado">Calcular frete</div><br>
             </div>
-
+				 <div class="inputTitle">Bairro:</div>
+				<input type="text" class="input" id="idBairro" name="idBairro">
             <div id="estadoContainerOpts">
-                <a href="" class="Eopts">RJ</a>
-                <a href="" class="Eopts">SP</a>
-                <a href="" class="Eopts">MG</a>
-                <a href="" class="Eopts">PR</a>
-                <a href="" class="Eopts">RS</a>
-                <a href="" class="Eopts">SC</a>
-                <a href="" class="Eopts">ES</a>
-                <a href="" class="Eopts">BA</a>
-                <a href="" class="Eopts">PE</a>
-                <a href="" class="Eopts">DF</a>
-                <a href="" class="Eopts">CE</a>
-                <a href="" class="Eopts">MS</a>
-                <a href="" class="Eopts">GO</a>
-                <a href="" class="Eopts">AM</a>
-                <a href="" class="Eopts">RN</a>
-                <a href="" class="Eopts">PB</a>
-                <a href="" class="Eopts">PA</a>
-                <a href="" class="Eopts">MT</a>
-                <a href="" class="Eopts">AL</a>
-                <a href="" class="Eopts">SE</a>
-                <a href="" class="Eopts">MA</a>
-                <a href="" class="Eopts">AC</a>
-                <a href="" class="Eopts">RO</a>
-                <a href="" class="Eopts">TO</a>
-                <a href="" class="Eopts">PI</a>
-                <a href="" class="Eopts">AP</a>
-                <a href="" class="Eopts">RR</a>
-                <a href="" class="Eopts">BRASIL</a>
             </div>
         </div>
+		
+		<div id="promoArea">
+			<div id="promoTitleArea">
+				<div class="globalTitle Estado">Promoção</div><br>
+			</div>
+			<div id="estadoContainerOpts">
+				<img src="assets/imgs/promo.jpg">
+            </div>
+		</div>
 
 
 
@@ -124,22 +108,43 @@ include "config.index.php";
 
 
 
-        <div id="anunciosRecentesArea">
-            <div class="globalTitle AR">Anúncios Recentes</div>
+
+
 
             <div id="areaAR">
-
-                <a href="">
+			        <div class="globalTitle AR">Cardapio</div>
                     <div class="anuncioRecente" id="prodN">
                         <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
                         <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
                         <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
                     </div>
-                </a>        
-
+					<div class="anuncioRecente" id="prodN">
+                        <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
+                        <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
+                        <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
+                    </div>
+					<div class="anuncioRecente" id="prodN">
+                        <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
+                        <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
+                        <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
+                    </div>
+				   <div class="anuncioRecente" id="prodN">
+                        <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
+                        <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
+                        <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
+                    </div>
+				   <div class="anuncioRecente" id="prodN">
+                        <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
+                        <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
+                        <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
+                    </div>
+				   <div class="anuncioRecente" id="prodN">
+                        <img src="assets/imgs/img-exemplo.jpg" alt="" class="imgAnuncio" id="imgN">
+                        <div class="nameAnuncio" id="nameN">Nome de Exemplo</div>
+                        <div class="precoAnuncio" id="precoN"><span>R$</span>99999</div>
+                    </div>       
             </div>
 
-        </div>
 
     </div>
 
@@ -150,7 +155,7 @@ include "config.index.php";
             <div id="col1Footer">
                 <a href="">Ajuda e <br> contato</a>
                 <a href="">Dicas de<br> segurança</a>
-                <a href="">Vender no<br> Prototipo+</a>
+                <a href="">Vender no<br> Pizzaria</a>
                 <a href="">Plano<br> Profissional</a>
             </div>
 

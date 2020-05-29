@@ -20,12 +20,12 @@ if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
     <script src="../../assets/frameworks/jquery.maskMoney.min.js"></script>
     <script src="anunciar.js"></script>
     <link rel="stylesheet" href="anunciar.css">
-    <title>Inserir anúncio | Prototipo+</title>
+    <title>Inserir anúncio | Pizzaria</title>
 </head>
 <body>
     <div id="header">
         <div id="headerInv">
-            <div id="headLogo"><p> Prototipo+ </p></div>
+            <div id="headLogo"><p> Pizzaria </p></div>
             <a href="../home/logout.php" id="userStatusArea">
                 <div>
                     Olá, <?php echo $nome;?> <span>&times;</span>
