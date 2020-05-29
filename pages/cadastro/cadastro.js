@@ -1,5 +1,5 @@
 $(function(){
-    $('#formCadastro').on('submit', function(e){
+    $('#formCadastro').submit(function(e){
         e.preventDefault();
 
         var userName = $('#userName').val();
@@ -39,12 +39,13 @@ $(function(){
             return false;
         }else{
             $.ajax({
-                type: 'POST',
-                data: {nome: userName, email: userEmail, senha: userPass},
-                dataType: 'json',
+                type: "POST",
                 url: 'config.cadastro.php',
+                data: $(this).serialize(),
                 success: function(json){
-                    if(json.status == "done"){
+                    console.log(json);
+                    if(json[11] == "d"){
+                        console.log('d');
                         $('.input').val("");
                         $('.input').css('border', '1px solid green');
                         $('#btnSubmit').text('Sucesso!, redirecionando ao login em 3 segundos');
@@ -53,7 +54,8 @@ $(function(){
                         }, 3000);
                     }
 
-                    if(json.status == "userEmailExist"){
+                    if(json[11] == "e"){
+                        console.log('e');
                         $('.status.email').text("Já existe um usuário registrado utilizando esse email!");
                         $('#userEmail').removeClass('input').addClass('inputFail');
                     }
