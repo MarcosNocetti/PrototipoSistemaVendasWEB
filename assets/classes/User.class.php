@@ -105,7 +105,7 @@ class User{
     }
     
 
-    public function setpass($s){
+    public function setSenha($s){
         $this->pass = $s;
     }
 
@@ -147,48 +147,17 @@ class User{
 
     public function SaveOrCreateUser(){
         if(!empty($this->id)){
-            $sql = "UPDATE tb_admin.usuarios 
-                    SET
-                        nome = :nome,
-                        email = :email,
-                        pass = :pass,
-                        telefone = :telefone,
-                        avatar = :avatar,
-                        estado = :estado,
-                        cidade = :cidade,
-                        bairro = :bairro
-                    WHERE id = :id";
-            
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":nome",$this->nome);
-            $sql->bindValue(":email",$this->email);
-            $sql->bindValue(":pass",$this->pass);
-            $sql->bindValue(":telefone",$this->telefone);
-            $sql->bindValue(":avatar",$this->avatar);
-            $sql->bindValue(":estado", $this->estado);
-            $sql->bindValue(":cidade", $this->cidade);
-            $sql->bindValue(":bairro", $this->bairro);
-            $sql->bindValue(":id", $this->id);
-            $sql->execute();
-
-
+            $sql = $this->prepare("UPDATE `tb_admin.usuarios` SET ?, ?, ?, ?, ?, ?, ?, ? WHERE id = ?");
+            $sql->execute(array($this->nome, $this->email, $this->pass, $this->telefone, $this->avatar, $this->estado, $this->cidade, $this->bairro, $this->id));
         }else{
             if($this->verificaEmail($this->email) == false){
-                $sql = "INSERT INTO tb_admin.usuarios(id, fbid, nome, email, avatar, pass, telefone, estado, cidade, bairro) 
-                    VALUES (NULL,:fbid,:nome,:email, :avatar,:pass, :estado, :cidade, :bairro)";
-                
-                $sql = $this->pdo->prepare($sql);
-                $sql->bindValue(":fbid",$this->fbId);
-                $sql->bindValue(":nome",$this->nome);
-                $sql->bindValue(":email",$this->email);
-                $sql->bindValue(":avatar",$this->avatar);
-                $sql->bindValue(":pass",$this->pass);
-                $sql->bindValue(":telefone",$this->telefone);
-                $sql->bindValue(":estado", $this->estado);
-                $sql->bindValue(":cidade", $this->cidade);
-                $sql->bindValue(":bairro", $this->bairro);
-                $sql->execute();
-
+                ($this->fbId == NULL) ? $this->fbId = 0 : $this->fbId;
+                ($this->telefone == NULL) ? $this->telefone = 0 : $this->telefone;
+                ($this->estado == NULL) ? $this->estado = 0 : $this->estado;
+                ($this->cidade == NULL) ? $this->cidade = 0 : $this->cidade;
+                ($this->bairro == NULL) ? $this->bairro = 0 : $this->bairro;
+                $sql = $this->prepare("INSERT INTO `tb_admin.usuarios` VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->execute(array($this->fbId, $this->nome, $this->email, $this->telefone, $this->pass, $this->avatar, $this->estado, $this->cidade, $this->bairro));
                 return true;
             }
             else{
@@ -199,10 +168,8 @@ class User{
     }
 
     private function verificaEmail($e){
-        $sql = "SELECT * FROM tb_admin.usuarios WHERE email = :email";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":email", $e);
-        $sql->execute();
+        $sql = $this->prepare("SELECT * FROM `tb_admin.usuarios` WHERE email = ?");
+        $sql->execute(array($e));
 
         if($sql->rowCount() > 0){
             return true;
