@@ -1,6 +1,6 @@
 <?php
 class User{
-    private $pdo;
+    private static $pdo;
 
     private $id;
     private $fbId;
@@ -13,18 +13,37 @@ class User{
     private $cidade;
     private $bairro;
 
-    public function __construct($id = NULL){
-        try {
-            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "root", "");
-        } catch (PDOException $e) {
-            echo "Error: ".$e->getMessage();
+    public static function prepare($query = false){
+        if($query != false){
+            if(self::$pdo == null){
+                try{
+                    $pdo = new PDO('mysql:host=localhost;dbname=prototipo_', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                }
+                catch(Exception $e){
+                    echo "<h2>Erro ao conectar!<h2>";
+                }
+            }
+            $pdo = $pdo->prepare($query);
+            return $pdo;
         }
+        else{
+            if (self::$pdo == null) {
+                try {
+                    $pdo = new PDO('mysql:host=localhost;dbname=prototipo_', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch (Exception $e) {
+                    echo "<h2>Erro ao conectar!<h2>";
+                }
+            }
+            return $pdo;
+        }
+    }
 
+    public function __construct($id = NULL){
         if(!empty($id)){
-            $sql = "SELECT * FROM tb_admin.usuarios WHERE id = :id";
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":id", $id);
-            $sql->execute();
+            $sql = $this->prepare("SELECT * FROM tb_admin.usuarios WHERE id = ?");
+            $sql->execute(array($id));
 
             if($sql->rowCount()>0){
                 $data = $sql->fetch();
@@ -42,7 +61,6 @@ class User{
             }
         }
     }
-
 
     public function getID(){
         return $this->id;
@@ -250,11 +268,8 @@ class User{
     }
 
     public function defaultLogin($e, $s){
-        $sql = 'SELECT * FROM tb_admin.usuarios WHERE email = :email AND pass = :pass';
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":email", $e);
-        $sql->bindValue(":pass", $s);
-        $sql->execute();
+        $sql = $this->prepare("SELECT * FROM `tb_admin.usuarios` WHERE email = ? AND pass = ?");
+        $sql->execute(array($e, $s));
 
         if($sql->rowCount() == 1){
             $dados = $sql->fetch();
@@ -268,10 +283,9 @@ class User{
 
     public function passEmpty($id){
         $user_id = $id;
-        $sql = 'SELECT * FROM tb_admin.usuarios WHERE id = :id';
+        $sql = "SELECT * FROM tb_admin.usuarios WHERE id = ?";
         $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(':id', $user_id);
-        $sql->execute();
+        $sql->execute(array($user_id));
 
         if($sql->rowCount() == 1){
             foreach($sql as $dados);
