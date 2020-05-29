@@ -8,7 +8,7 @@ $( document ).ready(function(){
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: 'login.ajax.php',
+            url: 'config.login.php',
             data: $(this).serialize(),
             success: function(data){
                 alert(data[11]);
