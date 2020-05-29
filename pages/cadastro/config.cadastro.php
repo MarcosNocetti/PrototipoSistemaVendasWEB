@@ -1,16 +1,16 @@
 <?php
-require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
+require "C:/xampp/htdocs/pizza/assets/classes/User.class.php";
 
-$nome = $_POST['userName'];
-$email = $_POST['userEmail'];
-$senha = $_POST['userPass'];
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$senha = $_POST['senha'];
 $usuario = new User;
 
 $statusRequest['status'] = "none";
 
-if(isset($nome) || !empty($nome) || strlen($nome) > 5){
-    if(isset($email) || !empty($email) || strlen($email) > 1 || strstr($email, '@')){
-        if(isset($senha) || !empty($senha) || strlen($senha) >= 8){
+if(!empty($nome) && strlen($nome) > 5){
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if(!empty($senha) && strlen($senha) >= 8){
             $avatar = "default_user.png";
             $usuario->setNome($nome);
             $usuario->setEmail($email);
@@ -22,16 +22,14 @@ if(isset($nome) || !empty($nome) || strlen($nome) > 5){
             //$usuario->SaveOrCreateUser();
 
             if($usuario->SaveOrCreateUser() == false){
-                $statusRequest['status'] = "userEmailExist";
+                $statusRequest['status'] = "e";
                 echo json_encode($statusRequest);
             }else{
-                $statusRequest['status'] = "done";
+                $statusRequest['status'] = "d";
                 echo json_encode($statusRequest);
             }
         }
     }
 }else{
-    echo json_encode("erro");
+    echo json_encode("f");
 }
-
-?>
