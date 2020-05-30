@@ -1,6 +1,6 @@
 <?php
 class Anuncio{
-    private $pdo;
+    private static $pdo;
     private $id;
     private $userid;
     private $titulo;
@@ -12,11 +12,30 @@ class Anuncio{
     private $bairro;
     private $fotos;
 
-    public function __construct(){
-        try{
-            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "root", "");
-        }catch(PDOException $e){
-            echo "Error: ".$e->getMessage();
+    public static function prepare($query = false){
+        if($query != false){
+            if(self::$pdo == null){
+                try{
+                    $pdo = new PDO('mysql:host=localhost;dbname=prototipo_', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                }
+                catch(Exception $e){
+                    echo "<h2>Erro ao conectar!<h2>";
+                }
+            }
+            $pdo = $pdo->prepare($query);
+            return $pdo;
+        }
+        else{
+            if (self::$pdo == null) {
+                try {
+                    $pdo = new PDO('mysql:host=localhost;dbname=prototipo_', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch (Exception $e) {
+                    echo "<h2>Erro ao conectar!<h2>";
+                }
+            }
+            return $pdo;
         }
     }
 
@@ -69,7 +88,9 @@ class Anuncio{
 
     public function setBairro($bairro){
         $this->bairro = $bairro;
-    } public function getBairro(){
+    }
+
+    public function getBairro(){
         return $this->bairro;
     }
 
@@ -79,39 +100,21 @@ class Anuncio{
 
     
     public function Save_anuncio(){
-           
 
-        $sql = "INSERT INTO tb_site.anuncios(id, userid, categoria_id, titulo, descricao, valor, cidade, estado, bairro) 
-                VALUES (NULL,:userid,:categoria_id,:titulo,:descricao,:valor,:cidade,:estado,:bairro)";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":userid", $this->userid);
-        $sql->bindValue(":categoria_id", $this->categoria_id);
-        $sql->bindValue(":titulo", $this->titulo);
-        $sql->bindValue(":descricao", $this->desc);
-        $sql->bindValue(":valor", $this->preco);
-        $sql->bindValue(":cidade", $this->cidade);
-        $sql->bindValue(":estado", $this->estado);
-        $sql->bindValue(":bairro", $this->bairro);
+        $sql = $this->prepare("INSERT INTO `tb_site.anuncios` VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql->execute(array($this->userid, $this->titulo, $this->preco, $this->desc, $this->categoria_id, $this->estado, $this->cidade,$this->bairro));
 
-        $sql->execute();
-
-        $sql2 = "SELECT id FROM tb_site.anuncios WHERE userid = :userid AND titulo = :titulo AND valor = :valor AND descricao = :descricao";
-        $sql2 = $this->pdo->prepare($sql2);
-        $sql2->bindValue(":userid", $this->userid);
-        $sql2->bindValue(":titulo", $this->titulo);
-        $sql2->bindValue(":valor", $this->preco);
-        $sql2->bindValue(":descricao", $this->desc);
-        $sql2->execute();
+        $sql2 = $this->prepare("SELECT id FROM `tb_site.anuncios` WHERE user_id = ? AND titulo = ? AND preco = ? AND descricao = ?");
+        $sql2->execute(array($this->userid, $this->titulo, $this->preco, $this->desc));
 
         $data = $sql2->fetch();  //Pegando o ID do anuncio
         $idAnunc = $data['id'];
-        
 
         if(count($this->fotos) > 0){
             for($i=0;$i<count($this->fotos['tmp_name']);$i++){
                 $tipo = $this->fotos['type'][$i];
                 if(in_array($tipo, array('image/jpeg', 'image/png'))){
-                    $tmpname = 'iD'.$idAnunc.'_'.time('d-m-y').'_'.rand(0,9999).'.jpg';
+                    $tmpname = 'iD'.$idAnunc.'_'.date('d-m-y').'_'.rand(0,9999).'.jpg';
                     move_uploaded_file($this->fotos['tmp_name'][$i], '../../assets/imgs/anuncios/'.$tmpname);
 
                     list($width_orig, $heigth_orig) = getimagesize('../../assets/imgs/anuncios/'.$tmpname);
@@ -136,11 +139,8 @@ class Anuncio{
 
                     imagejpeg($img, '../../assets/imgs/anuncios/'.$tmpname, 80);
 
-                    $sql3 = "INSERT INTO img_anuncio SET id = NULL, anuncio_id = :anuncio_id, img_anuncio.url = :url";
-                    $sql3 = $this->pdo->prepare($sql3);
-                    $sql3->bindValue(":anuncio_id", $idAnunc);
-                    $sql3->bindValue(":url", $tmpname);
-                    $sql3->execute();
+                    $sql3 = $this->prepare("INSERT INTO `tb_anuncios.fotos` VALUES (NULL, ?, ?)");
+                    $sql3->execute(array($idAnunc, $tmpname));
                 }
             }
         }
