@@ -14,7 +14,7 @@ class Anuncio{
 
     public function __construct(){
         try{
-            $this->pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "root", "");
+            $pdo = new PDO("sqlsrv:server = tcp:240820.database.windows.net,1433; Database = prototipo_", "lovendcode", "Prototipo+Azure", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         }catch(PDOException $e){
             echo "Error: ".$e->getMessage();
         }

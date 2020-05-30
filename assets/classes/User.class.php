@@ -17,7 +17,7 @@ class User{
         if($query != false){
             if(self::$pdo == null){
                 try{
-                    $pdo = new PDO('mysql:host=localhost;dbname=prototipo_', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                    $pdo = new PDO("sqlsrv:server = tcp:240820.database.windows.net,1433; Database = prototipo_", "lovendcode", "Prototipo+Azure", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 }
                 catch(Exception $e){

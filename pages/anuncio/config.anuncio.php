@@ -1,6 +1,6 @@
 <?php
 try{
-    $pdo = new PDO("mysql:dbname=Prototipomais;host=localhost", "jackvini2", "Sacramento1@");
+    $pdo = new PDO("sqlsrv:server = tcp:240820.database.windows.net,1433; Database = prototipo_", "lovendcode", "Prototipo+Azure", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 }catch(PDOException $e){
     echo "Error: ".$e->getMessage();
 }
