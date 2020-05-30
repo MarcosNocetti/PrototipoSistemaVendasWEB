@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2020 at 08:59 PM
+-- Generation Time: May 30, 2020 at 08:38 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Pizzaria`
+-- Database: `prototipo_`
 --
 
 -- --------------------------------------------------------
@@ -76,13 +76,21 @@ CREATE TABLE `tb_admin.usuarios` (
   `fbid` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `tel` int(11) NOT NULL,
+  `tel` int(11) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
-  `estado` varchar(255) NOT NULL,
-  `cidade` varchar(255) NOT NULL,
-  `bairro` varchar(255) NOT NULL
+  `estado` varchar(255) DEFAULT NULL,
+  `cidade` varchar(255) DEFAULT NULL,
+  `bairro` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_admin.usuarios`
+--
+
+INSERT INTO `tb_admin.usuarios` (`id`, `fbid`, `nome`, `email`, `tel`, `pass`, `avatar`, `estado`, `cidade`, `bairro`) VALUES
+(1, 0, 'tupi', 'g@g.com', 989665147, '25d55ad283aa400af464c76d713c07ad', '', 'sp', 'sp', 'sp'),
+(2, 0, 'Guilherme Tupinambá Durães', 'guilherme.tupinamba@gmail.com', 0, '25d55ad283aa400af464c76d713c07ad', 'default_user.png', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -99,6 +107,26 @@ CREATE TABLE `tb_admin.visitas` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_anuncios.fotos`
+--
+
+CREATE TABLE `tb_anuncios.fotos` (
+  `id` int(11) NOT NULL,
+  `anuncio_id` int(11) NOT NULL,
+  `foto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_anuncios.fotos`
+--
+
+INSERT INTO `tb_anuncios.fotos` (`id`, `anuncio_id`, `foto`) VALUES
+(1, 7, 'iD7_30-05-20_3509.jpg'),
+(2, 8, 'iD8_30-05-20_1782.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_site.anuncios`
 --
 
@@ -111,9 +139,22 @@ CREATE TABLE `tb_site.anuncios` (
   `categoria_id` int(11) NOT NULL,
   `estado` varchar(255) NOT NULL,
   `cidade` varchar(255) NOT NULL,
-  `bairro` varchar(255) NOT NULL,
-  `fotos` text NOT NULL
+  `bairro` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_site.anuncios`
+--
+
+INSERT INTO `tb_site.anuncios` (`id`, `user_id`, `titulo`, `preco`, `descricao`, `categoria_id`, `estado`, `cidade`, `bairro`) VALUES
+(1, 2, 'Nada', 0, 'fdhsfdsf', 10, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(2, 2, 'Nada', 0, 'oioipnp', 8, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(3, 2, 'Nada', 0, 'wefecqc', 10, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(4, 2, 'Nada', 0, 'sdfkçjaso', 9, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(5, 2, 'Nada', 0, 'gyfkufvhjlb', 6, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(6, 2, 'Nada', 0, 'jkgvk', 5, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(7, 2, 'Nada', 0, '23535ywgst', 9, 'SP', 'Santana de Parnaíba', 'Alphaville'),
+(8, 2, 'Nada', 0, 'raegrgs', 8, 'SP', 'Santana de Parnaíba', 'Alphaville');
 
 -- --------------------------------------------------------
 
@@ -185,6 +226,12 @@ ALTER TABLE `tb_admin.visitas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_anuncios.fotos`
+--
+ALTER TABLE `tb_anuncios.fotos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_site.anuncios`
 --
 ALTER TABLE `tb_site.anuncios`
@@ -228,7 +275,7 @@ ALTER TABLE `tb_admin.online`
 -- AUTO_INCREMENT for table `tb_admin.usuarios`
 --
 ALTER TABLE `tb_admin.usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_admin.visitas`
@@ -237,10 +284,16 @@ ALTER TABLE `tb_admin.visitas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_anuncios.fotos`
+--
+ALTER TABLE `tb_anuncios.fotos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `tb_site.anuncios`
 --
 ALTER TABLE `tb_site.anuncios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_site.categoria`
