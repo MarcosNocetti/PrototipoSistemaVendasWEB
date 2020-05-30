@@ -3,7 +3,7 @@ $( document ).ready(function(){
     $('#cep').mask("99999-999");
 
     $("#preco").maskMoney({
-        prefix: "R$:",
+        prefix: "R$",
         decimal: ",",
         thousands: "."
     });
@@ -119,13 +119,14 @@ $( document ).ready(function(){
             e.preventDefault();
 
             $.ajax({
+                type: "POST",
                 url: "requests.php",
-                type: "POST",             
                 data: new FormData(this), 
                 contentType: false,       
                 cache: false,             
                 processData:false,
                 success: function(data){
+                    console.log(data);
                     if(data == "max-photos"){
                         $('.errorArea.fotos').html("Você ultrapassou o limite de <strong>6 fotos</strong> por anúncio!")
                         $('#fotos').css("border", "1px solid red");
