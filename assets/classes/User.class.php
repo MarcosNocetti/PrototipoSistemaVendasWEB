@@ -42,7 +42,7 @@ class User{
 
     public function __construct($id = NULL){
         if(!empty($id)){
-            $sql = $this->prepare("SELECT * FROM tb_admin.usuarios WHERE id = ?");
+            $sql = $this->prepare("SELECT * FROM `tb_admin.usuarios` WHERE id = ?");
             $sql->execute(array($id));
 
             if($sql->rowCount()>0){
@@ -52,7 +52,7 @@ class User{
                 $this->fbId = $data['fbid'];
                 $this->nome = $data['nome'];
                 $this->email = $data['email'];
-                $this->telefone = $data['telefone'];
+                $this->telefone = $data['tel'];
                 $this->pass = $data['pass'];
                 $this->avatar = $data['avatar'];
                 $this->estado = $data['estado'];
@@ -84,12 +84,8 @@ class User{
 
     public function mudaEmail($e){
         if($this->verificaEmail($e) == false){
-            $sql = "UPDATE tb_admin.usuarios SET email = :email WHERE id = :id";
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":email", $e);
-            $sql->bindValue(":id", $this->id);
-            $sql->execute();
-
+            $sql = $this->prepare("UPDATE `tb_admin.usuarios` SET email = ? WHERE id = ?");
+            $sql->execute(array($e, $this->id));
             $this->email = $e;
             return true;
         }else{
@@ -179,7 +175,7 @@ class User{
     }
 
     public function verificapass($pass, $id){
-        $sql = 'SELECT * FROM tb_admin.usuarios WHERE email = ? AND pass = ?';
+        $sql = 'SELECT * FROM `tb_admin.usuarios` WHERE email = ? AND pass = ?';
         $sql = $this->pdo->prepare($sql);
         $sql->execute(array($e, $s));
 
@@ -191,10 +187,8 @@ class User{
     }
 
     public function salvarLogarFB(){
-        $sql = 'SELECT * FROM tb_admin.usuarios WHERE fbid = :fbid';
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":fbid", $this->fbId);
-        $sql->execute();
+        $sql = $this->pdo->prepare('SELECT * FROM `tb_admin.usuarios` WHERE fbid = :fbid');
+        $sql->execute(array($this->fbId));
 
         if($sql->rowCount() > 0){
             foreach($sql as $dados){
@@ -204,25 +198,11 @@ class User{
             
             header("Location: ../../index.php");
         }else{
-            $sql = "INSERT INTO tb_admin.usuarios(id, fbid, nome, email, avatar, pass, telefone, estado, cidade, bairro) 
-                    VALUES (NULL,:fbid,:nome,:email, :avatar,:pass,:telefone,:estado,:cidade,:bairro)";
-                
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":fbid",$this->fbId);
-            $sql->bindValue(":nome",$this->nome);
-            $sql->bindValue(":email",$this->email);
-            $sql->bindValue(":avatar",$this->avatar);
-            $sql->bindValue(":pass",$this->pass);
-            $sql->bindValue(":telefone",$this->telefone);
-            $sql->bindValue(":estado", $this->estado);
-            $sql->bindValue(":cidade", $this->cidade);
-            $sql->bindValue(":bairro", $this->bairro);
-            $sql->execute();
+            $sql = $this->prepare("INSERT INTO `tb_admin.usuarios` VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $sql->execute(array($this->fbId, $this->nome, $this->email, $this->avatar, $this->pass, $this->telefone, $this->estado, $this->cidade, $this->bairro));
 
-            $sql2 = 'SELECT * FROM tb_admin.usuarios WHERE fbid = :fbid';
-            $sql2 = $this->pdo->prepare($sql2);
-            $sql2->bindValue(":fbid", $this->fbId);
-            $sql2->execute();
+            $sql2 = $this->prepare('SELECT * FROM `tb_admin.usuarios` WHERE fbid = ?');
+            $sql2->execute(array($this->fbId));
 
             foreach($sql2 as $dados){
                 $_SESSION['id'] = $dados['id'];
@@ -250,8 +230,7 @@ class User{
 
     public function passEmpty($id){
         $user_id = $id;
-        $sql = "SELECT * FROM tb_admin.usuarios WHERE id = ?";
-        $sql = $this->pdo->prepare($sql);
+        $sql = $this->prepare("SELECT * FROM `tb_admin.usuarios` WHERE id = ?");
         $sql->execute(array($user_id));
 
         if($sql->rowCount() == 1){
