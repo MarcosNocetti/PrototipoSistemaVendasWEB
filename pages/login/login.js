@@ -11,19 +11,34 @@ $( document ).ready(function(){
             url: 'config.login.php',
             data: $(this).serialize(),
             success: function(data){
-                alert(data[11]);
+                console.log(data);
                 if (data[11] == 'd') {
                     $('.input').attr('disabled', 'disabled');
                     $('#btnSubmit').text('Sucesso!, redirecionando ao login em 3 segundos');
                     setInterval(function () {
                         window.location.href = "../../index.php";
                     }, 3000);
-                } if (data[11] == 'f') {
+                } else if (data[11] == 'f'){
                     $('.input').removeClass('input').addClass('inputFail');
-                    $('.error.senha').text('Não são permitidos campos vazios!');
-                } else {
-                    $('.input').removeClass('input').addClass('inputFail');
-                    $('.error.senha').text('Usuário não encontrado!');
+                    $('.error.email').text('');
+                    $('.error.senha').text('Usuário e/ou senha inválido(s)');
+                } else if (data[11] == 'e') {
+                    $('#userEmail.input').removeClass('input').addClass('inputFail');
+                    $('#userPass.inputFail').removeClass('inputFail').addClass('input');
+                    $('.error.senha').text('');
+                    $('.error.email').text('Digite o email');
+                } else if (data[11] == 's') {
+                    $('#userPass.input').removeClass('input').addClass('inputFail');
+                    $('#userEmail.inputFail').removeClass('inputFail').addClass('input');
+                    $('.error.email').text('');
+                    $('.error.senha').text('Digite a senha');
+                }
+                else {
+                    if (data[11] == '2') {
+                        $('.input').removeClass('input').addClass('inputFail');
+                        $('.error.email').text('Digite um email');
+                        $('.error.senha').text('Digite uma senha');
+                    }
                 }
             }
         });
