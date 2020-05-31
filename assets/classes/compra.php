@@ -1,5 +1,6 @@
 <?php
 require('config.php');
+    /* ta falando que tem um erro aqui mas ainda não achei */
     public static function prepare($query = false){
         if($query != false){
             if(self::$pdo == null){
@@ -42,7 +43,7 @@ require('config.php');
         }
         /* confirmar o pedido para a entrega */
         public function confirmarPedido(){
-            
+
         }   
     }
 ?>
