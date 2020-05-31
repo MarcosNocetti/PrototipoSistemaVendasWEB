@@ -1,5 +1,5 @@
 <?php
-require "C:/xampp/htdocs/pizza/assets/classes/User.class.php";
+require "C:/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 
 $nome = $_POST['nome'];
 $email = $_POST['email'];

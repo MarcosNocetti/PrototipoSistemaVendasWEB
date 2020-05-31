@@ -34,47 +34,34 @@ if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
         </div>
     </div>
 
-    <div id="title"><h2>O que você não quer mais?</h2></div>
+    <div id="title"><h2>Pedido no carrinho</h2></div>
 
     <div id="formArea">
         <form method="post" enctype="multipart/form-data" id="form">
             
             <div class="inputKit">
-                <div class="titleForInput titulo">Título</div>
+                <div class="titleForInput titulo">Seu nome</div>
                 <input type="text" name="titulo" class="inputs" id="titulo">
                 <div class="errorArea titulo"></div>
             </div>
 
             <div class="inputKit">
                 <div class="titleForInput preco">Preço</div>
-                <input type="text" name="preco" class="inputs" id="preco">
+                <!--Arrumar esse echo e fazer a classe compra-->
+                <h3  class="textForPreco"><?php require('../assets/classes/compra.php'); echo  compra::valorTotal();?> <>
                 <div class="errorArea preco"></div>
             </div>
 
             <div class="inputKit">
-                <div class="titleForInput desc">Descrição</div>
+                <div class="titleForInput desc">Observações</div>
                 <textarea name="desc" id="desc" cols="86" rows="10" id="desc" class="inputs desc"></textarea>
                 <div class="errorArea desc"></div>
             </div>
 
             <div class="inputKit">
-                <div class="titleForInput categoria">Categoria</div>
-                <select name="categoria" id="categoria" class="inputs">
-                    <option value=""></option>
-                    <option value="1">Imóveis</option>
-                    <option value="2">Autos e peças</option>
-                    <option value="3">Para a sua casa</option>
-                    <option value="4">Eletrônicos e celulares</option>
-                    <option value="5">Música e hobbies</option>
-                    <option value="6">Esporte e lazer</option>
-                    <option value="7">Artigos infantis</option>
-                    <option value="8">Animais de estimação</option>
-                    <option value="9">Moda e beleza</option>
-                    <option value="10">Agro e indústria</option>
-                    <option value="11">Comércio e escritório</option>
-                    <option value="12">Serviços</option>
-                </select>
-                <div class="errorArea categoria"></div>
+          <!-- Acho que aqui devemos adaptar pra mostrar uma tabela com os pedidos adicionados, basicamente dar um echo em tudo que foi adicionado ao carrinho--> 
+          <!-- Ainda não fiz a funcao entao nao fiz o aqui o print -->
+
             </div>
 
             <div class="inputKit">
@@ -87,10 +74,13 @@ if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
             </div>
 
             <div class="inputKit">
-                <div class="titleForInput fotos">Fotos</div>
-                <div id="subTfotos">Adicione até <strong>6 fotos</strong> <strong>(.png ou .jpg)</strong></div>
-                <input type="file" name="fotos[]" id="fotos" multiple="multiple" accept="image/.jpeg,.png,.jpg">
-                <div class="errorArea fotos"></div>
+                <!-- Selecionar forma de pagamento -->
+                <input type="radio" id="cash" name="payment" value="cash">
+                <label for="male">Dinheiro</label><br><!-- adicionar função pra se dinheiro for selecionado perguntar do troco -->
+                <input type="radio" id="credit" name="paymentr" value="credit">
+                <label for="female">Credito</label><br>
+                <input type="radio" id="debit" name="payment" value="debit">
+                <label for="other">Debito</label>
             </div>
 
             <div class="inputKit">
@@ -105,7 +95,7 @@ if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
 
         <div id="footer">
             <div id="footerInv">
-                <div id="footerTerms"> Ao publicar você concorda e aceita nossos <a href=""> Termos de Uso </a> e <a href=""> Privacidade </a></div>
+                <div id="footerTerms"> Ao confirmar o pedido você concorda que os dados acima estão corretos <a href=""> Termos de Uso </a> e <a href=""> Privacidade </a></div>
                 <input type="submit" value="Enviar Anúncio" id="btnSubmit">
             </div>
         </div>

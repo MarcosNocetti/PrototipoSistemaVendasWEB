@@ -42,7 +42,9 @@ require "header/header.config.php";
                 </li>
             </div>
 
-            <div id="anunciarBtn">Anunciar</div>
+            <div id="anunciarBtn">
+					<img src="assets/imgs/cart.ico">
+				</div>
 
 
         <?php } else{

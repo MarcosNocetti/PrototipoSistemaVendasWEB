@@ -1,5 +1,5 @@
 <?php
-require "C:/xampp/htdocs/pizza/assets/classes/User.class.php";
+require "C:/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
 session_start();
 
 if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {$email = $_POST['email'];} else {$statusRequest['status'] = "fail"; die(json_encode($statusRequest));}
