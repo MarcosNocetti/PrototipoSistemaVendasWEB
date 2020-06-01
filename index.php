@@ -47,7 +47,7 @@ include "config.index.php";
                     </li>
                 </div>
 
-                <div id="anunciarBtn">
+                <div id="carrinhoBtn">
 					<img src="assets/imgs/cart.ico">
 				</div>
 
@@ -64,7 +64,7 @@ include "config.index.php";
                     <div id="userName">Entrar</div>
                 </div>
 
-                <div id="anunciarBtn">
+                <div id="carrinhoBtn">
 					<img src="assets/imgs/cart.ico">
 				</div>
 
