@@ -1,5 +1,6 @@
 <?php   
     require "fb.login.php";
+require 'C:/xampp/htdocs/pizza/assets/classes/Compra.class.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 
     <title>Login | Pizzaria</title>
 </head>
-<body>
+<body id="<?php $cart = new Compra(); echo $cart->getCarrinho(); ?>">
 
     <div id="loadingDiv">
         <div class="loader"></div>
