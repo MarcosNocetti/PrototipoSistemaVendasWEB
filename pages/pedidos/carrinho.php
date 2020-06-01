@@ -1,8 +1,11 @@
 <?php
-require "config.anunciar.php";
+require 'C:/xampp/htdocs/pizza/assets/classes/Compra.class.php';
 
 if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-    header("Location: ../../index.php");
+    Compra::setCarrinho();
+    header("Location: ../login/login.php");
+}else {
+    Compra::setPadrao();
 }
 ?>
 
@@ -48,7 +51,7 @@ if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
             <div class="inputKit">
                 <div class="titleForInput preco">Preço</div>
                 <!--Arrumar esse echo e fazer a classe compra-->
-                <h3  class="textForPreco"><?php require('../assets/classes/compra.php'); echo  compra::valorTotal();?> <>
+                <h3  class="textForPreco"><?php require('../assets/classes/Compra.class.php'); echo  compra::valorTotal();?> <>
                 <div class="errorArea preco"></div>
             </div>
 
