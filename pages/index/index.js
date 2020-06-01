@@ -14,6 +14,11 @@ $(function(){
         window.location.href = "pages/anunciar/anunciar.php";
     });
 
+    $('#carrinhoBtn').on('click', function(){
+        alert('a');
+        window.location.href = "pages/carrinho/carrinho.php";
+    });
+
     $('#meusAnunciosArea').on('click', function(){
         window.location.href = "pages/meus-anuncios/meus-anuncios.php";
     });
