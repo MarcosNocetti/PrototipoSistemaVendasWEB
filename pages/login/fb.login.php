@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/lib/Facebook/autoload.php";
-require "/xampp2/htdocs/PrototipoSistemaVendasWEB/assets/classes/User.class.php";
+require "/xampp/htdocs/pizza/assets/lib/Facebook/autoload.php";
+require "/xampp/htdocs/pizza/assets/classes/User.class.php";
 
 $fb = new Facebook\Facebook([
     'app_id' => '649380592514912',

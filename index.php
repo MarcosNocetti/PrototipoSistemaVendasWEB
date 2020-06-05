@@ -1,5 +1,10 @@
 <?php   
 include "config.index.php";
+
+if (isset($_COOKIE['cart'])) {
+    unset($_COOKIE['cart']);
+    setcookie('cart', null, -1, '/');
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +40,7 @@ include "config.index.php";
                 <div id="userStatus">
                     <img src="assets/imgs/user_pics/user_avatar/<?php echo $avatar; ?>" class="imgsMenu" id="userAvatar">
 
-                    <li id="userArea"><div id="userName"><?php echo $nome; ?><span id="seta"><img src="assets/imgs/arrow.png" alt=""></span></div>
+                    <div id="userArea"><div id="userName"><?php echo $nome; ?><span id="seta"><img src="assets/imgs/arrow.png" alt=""></span></div>
 
                         <ul id="userOpts">
                             <li id="menu-anuncios">Meus pedidos</li>
@@ -44,7 +49,7 @@ include "config.index.php";
                             <li id="menu-sair">Sair</li>
                         </ul>
 
-                    </li>
+                    </div>
                 </div>
 
                 <div id="carrinhoBtn">

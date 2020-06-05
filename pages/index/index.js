@@ -15,7 +15,6 @@ $(function(){
     });
 
     $('#carrinhoBtn').on('click', function(){
-        alert('a');
         window.location.href = "pages/carrinho/carrinho.php";
     });
 

@@ -1,6 +1,9 @@
 <?php   
     require "fb.login.php";
-require 'C:/xampp/htdocs/pizza/assets/classes/Compra.class.php';
+
+    if(isset($_SESSION['id']) || !empty($_SESSION['id'])){
+        header("Location: ../../index.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +19,7 @@ require 'C:/xampp/htdocs/pizza/assets/classes/Compra.class.php';
 
     <title>Login | Pizzaria</title>
 </head>
-<body id="<?php $cart = new Compra(); echo $cart->getCarrinho(); ?>">
+<body>
 
     <div id="loadingDiv">
         <div class="loader"></div>

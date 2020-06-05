@@ -16,7 +16,11 @@ $( document ).ready(function(){
                     $('.input').attr('disabled', 'disabled');
                     $('#btnSubmit').text('Sucesso!, redirecionando ao login em 3 segundos');
                     setInterval(function () {
-                        window.location.href = "../../index.php";
+                        if (document.cookie.split(';').some((item) => item.trim().startsWith('cart='))) {
+                            window.location.href = "../carrinho/carrinho.php";
+                        }else {
+                            history.go(-1);
+                        }
                     }, 3000);
                 } else if (data[11] == 'f'){
                     $('.input').removeClass('input').addClass('inputFail');

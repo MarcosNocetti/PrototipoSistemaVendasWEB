@@ -22,13 +22,14 @@ $(function(){
             $('#userEmail').css("border", "1px solid red");
             return;
         }else{
+            $('#userEmail').removeClass('inputFail').addClass('input');
+            $('.status.email').text(" ");
             status = "t";
         }
 
         if(userPass.length < 8){
-            $('.status.senha').html("Sua senha deve conter pelomenos <strong>8 caracteres</strong>");
+            $('.status.senha').html("Sua senha deve conter pelo menos <strong>8 caracteres</strong>");
             $('#userPass').removeClass('input').addClass('inputFail');
-            return;
         }else{
             $('#userPass').removeClass('inputFail').addClass('input');
             $('.status.senha').text("");
@@ -46,6 +47,10 @@ $(function(){
                     console.log(json);
                     if(json[11] == "d"){
                         console.log('d');
+                        $('#userName').removeClass('inputFail').addClass('input');
+                        $('#userEmail').removeClass('inputFail').addClass('input');
+                        $('#userPass').removeClass('inputFail').addClass('input');
+                        $('.status').text(" ");
                         $('.input').val("");
                         $('.input').css('border', '1px solid green');
                         $('#btnSubmit').text('Sucesso!, redirecionando ao login em 3 segundos');

@@ -1,4 +1,7 @@
-<?php require "../login/fb.login.php" ?>
+<?php require "../login/fb.login.php" ;
+if(isset($_SESSION['id']) || !empty($_SESSION['id'])){
+    header("Location: ../../index.php");
+}?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
